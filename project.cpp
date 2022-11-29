@@ -12,9 +12,10 @@ class Customer{
         int w_amt;
         string type;
         string address;
-        long int ph_no;
+        long long int ph_no;
         int c=1;
-        void cho_acc(){
+       
+    void cho_acc(){
         cout<<"Enter your account number-";
         cin>>acc_no;
         cout<<"Enter pin-";
@@ -113,6 +114,7 @@ class Bank: public Customer
     string f_name;
     string m_name;
     string l_name;
+   
     void open_acc(){
         t=1;
         cout<<"Enter your details for opening the account\n";
@@ -120,7 +122,7 @@ class Bank: public Customer
         cin>>f_name;
         cout<<"Last name- ";
         cin>>l_name;
-        name=f_name + m_name + l_name;
+        name=f_name + l_name;
         cout<<"Phone Number-";
         cin>>ph_no;
         cout<<"Address-";
@@ -136,6 +138,7 @@ class Bank: public Customer
         acc_no++;
         cout<<"Your account number-"<<acc_no<<endl;
     }
+   
     void check_balance(){
         Customer::cho_acc();
         if(t==1){
@@ -156,6 +159,7 @@ class Bank: public Customer
         return;
      }
     }
+
     void deposit(){
         if(t==0){
           cho_acc();
@@ -165,6 +169,7 @@ class Bank: public Customer
         balance += de_amt;
         cout<<"Total balance: "<<balance<<endl;
     }
+    
     void withdraw(){
         if(t==0){
         cho_acc();
@@ -197,22 +202,26 @@ class Card : public Bank{
     case 1:
     cout<<"Cards blocked"<<endl;
         break;
+    
     case 2:
     cout<<" Your request for Ecom service is processed successfully"<<endl;
     break;
+    
     case 3:
     cout<<" Your request for switching on atm service is processed successfully"<<endl;
     break;
+    
     case 4:
     cout<<" Your request for switching on atm service is processed successfully"<<endl;
     break;
+    
     default:
     cout<<"Invalid choice"<<endl;;
         break;
     }
     }
-
 };
+
 class Loan :public Bank{
     public:
     long long int lo_amt;
@@ -240,16 +249,143 @@ class Loan :public Bank{
   } 
 };
 
+  class FixDep: public Bank{
+    public:
+    int fd;
+    int interest;
+    int ti;
+    float rate;
+    int amo;
+    int age;
+     void fide(){
+        cout<<"1.Standard"<<endl<<"2.Tax Saving"<<endl<<"3.Special"<<endl<<"4.Regular"<<endl<<"5.Senior_Citizen"<<endl<<"6.Flexi"<<endl;
+        cout<<"Choose an FD"<<endl;
+        cin>>fd;
+        
+        cout<<"Enter the amount for fixed deposit-";
+        cin>>amo;
+        
+        cout<<"Enter the duration (in year) for fixed deposit-";
+        cin>>ti;
+        
+        cout<<"Enter your age-";
+        cin>>age;
+       
+        switch(fd){
+            case 1:
+            if(ti<=3){
+                rate=5.35;
+            } else {
+                rate=5.80;
+            }
+           
+               interest=amo*ti*rate/100;
+                amo=amo+interest;
+                cout<<"You choosed Standard FD for "<<ti<<" years at the interest rate of "<<rate<<endl;
+                cout<<"Amount you receive after "<<ti<<" years from your FD is "<<amo<<endl;
+        break;
+       
+        case 5:
+            if(age>=60) {
+            if(ti<=5){
+                rate=6.75;
+            } else {
+                rate=7.00;
+            }
+           
+               interest=amo*ti*rate/100;
+                amo=amo+interest;
+                cout<<"You choosed Senior citizen FD for "<<ti<<" years at the interest rate of "<<rate<<endl;
+                cout<<"Amount you receive after "<<ti<<" years from your FD is "<<amo<<endl;
+            } else {
+                cout<<"You are not eligible for this FD"<<endl;
+            }         
+        break;
+       
+        case 2:
+            
+            if(age<=60){
+                rate=6.10;
+            } else {
+                rate=6.60;
+            }
+           
+               interest=amo*ti*rate/100;
+                amo=amo+interest;
+                 cout<<"You choosed Tax Saving FD for "<<ti<<" years at the interest rate of "<<rate<<endl;
+                cout<<"Amount you receive after "<<ti<<" years from your FD is "<<amo<<endl;
+        break;
+       
+      case 4:
+            if(age<=60){
+               rate=6.10;
+            } else {
+                 rate=6.90;
+            }
+           
+               interest=amo*ti*rate/100;
+                amo=amo+interest;
+                 cout<<"You choosed Regular FD for "<<ti<<" years at the interest rate of "<<rate<<endl;
+                cout<<"Amount you receive after "<<ti<<" years from your FD is "<<amo<<endl;
+        break;
+          
+         case 3:
+            if(age>=60){
+            if(ti<=3){
+               rate=6.10;
+            } else {
+                 rate=6.90;
+            }
+           
+               interest=amo*ti*rate/100;
+                amo=amo+interest;
+                 cout<<"You choosed Special FD for "<<ti<<" years at the interest rate of "<<rate<<endl;
+                cout<<"Amount you receive after "<<ti<<" years from your FD is "<<amo<<endl;
+            } else {
+                cout<<"You are not eligible for this FD"<<endl;
+            }     
+        break;
+         
+        case 6:
+            if(ti>=5){
+                rate=5;
+            } else{
+                cout<<"Flexi Deposit not apporved";
+            }
+           
+               interest=amo*ti*rate/100;
+                amo=amo+interest;
+                 cout<<"You choosed Flexi FD for "<<ti<<" years at the interest rate of "<<rate<<endl;
+                cout<<"Amount you receive after "<<ti<<" years from your FD is "<<amo<<endl;
+        break;
+
+        default:
+        cout<<"Invalid choice"<<endl;
+        }
+     }
+  };
+
 int main(){
     Bank b;
     Loan l;
     Card k;
+    FixDep f;
     int c=1;
 
     //cout<<"Enter your choice";
-    while(c>0 && c<8){
-    cout<<endl<<"1.Opening account  "<<"2.Check Balance  "<<"3.Deposit money  "<<"4.Withdraw money  "<<"5.Applying for loan  6.Applying for card  7.Card service"<<endl;
-    cout<<endl<<"Enter your choice- ";
+    while(c>0 && c<9){
+    cout<<"\t\t\t****   CHOICES   ****";  
+    
+     cout<<endl<<"\t\t1. Open account "<<endl;
+    cout<<"\t\t2. Details "<<endl;
+    cout<<"\t\t3. Deposit money "<<endl;
+    cout<<"\t\t4. Withdraw money"<<endl;
+    cout<<"\t\t5. Apply for loan "<<endl;
+    cout<<"\t\t6. Apply for card"<<endl;
+    cout<<"\t\t7. Card service "<<endl;
+    cout<<"\t\t8. Fixed Deposit"<<endl;
+
+    cout<<endl<<"\t\tEnter your choice- ";
      cin>>c;
     switch(c){
         case 1:
@@ -272,6 +408,9 @@ int main(){
         break;
         case 7:
         k.service();
+        break;
+        case 8:
+        f.fide();
         break;
         default:
         cout<<"Invalid choice"<<endl;
