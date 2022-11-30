@@ -15,7 +15,7 @@ class Customer{
         long long int ph_no;
         int c=1;
        
-    void cho_acc(){
+        void cho_acc(){
         cout<<"Enter your account number-";
         cin>>acc_no;
         cout<<"Enter pin-";
@@ -117,24 +117,24 @@ class Bank: public Customer
    
     void open_acc(){
         t=1;
-        cout<<"Enter your details for opening the account\n";
-        cout<<"First Name-";
+        cout<<"Enter your details for opening the account\n\n";
+        cout<<"First Name- ";
         cin>>f_name;
         cout<<"Last name- ";
         cin>>l_name;
         name=f_name + l_name;
-        cout<<"Phone Number-";
+        cout<<"Phone Number- ";
         cin>>ph_no;
-        cout<<"Address-";
+        cout<<"Address- ";
         cin>>address;
-        cout<<"Accout type-";
+        cout<<"Accout type- ";
         cin>>type;
-        cout<<"Ammount-";
+        cout<<"Ammount- ";
         cin>>balance;
-        cout<<"Pin-";
+        cout<<"Pin- ";
         cin>>pin;
-        cout<<"Account Created"<<endl;
-        acc_no=9800008;
+        cout<<endl<<"Account Created"<<endl;
+        acc_no=9400008;
         acc_no++;
         cout<<"Your account number-"<<acc_no<<endl;
     }
@@ -148,8 +148,8 @@ class Bank: public Customer
         }
      if(c==1 || t==1){
         if(acc_no==acc_no && pin==pin){
-        cout<<endl<<"Name-"<<name<<endl;
-        cout<<"Acc. Number-"<<acc_no<<endl;
+  cout<<endl<<"Name   -"<<name<<endl;
+        cout<<"Acc. No-"<<acc_no<<endl;
         cout<<"Balance-"<<balance<<endl<<endl;
         } else {
             cout<<"Wrong pin or account does not exist"<<endl;
@@ -181,7 +181,7 @@ class Bank: public Customer
     }
 };
 
-class Card : public Bank{
+class Card : virtual public Bank{
     public:
     string card;
     int serv;
@@ -219,10 +219,10 @@ class Card : public Bank{
     cout<<"Invalid choice"<<endl;;
         break;
     }
-    }
+  }
 };
 
-class Loan :public Bank{
+class Loan : virtual public Bank{
     public:
     long long int lo_amt;
     double int_rate=8;
@@ -249,7 +249,7 @@ class Loan :public Bank{
   } 
 };
 
-  class FixDep: public Bank{
+  class FixDep: virtual public Bank{
     public:
     int fd;
     int interest;
@@ -365,57 +365,77 @@ class Loan :public Bank{
      }
   };
 
-int main(){
-    Bank b;
-    Loan l;
-    Card k;
-    FixDep f;
-    int c=1;
+  class window:virtual public Bank, public Loan, public Card, public FixDep{
+    public:
+
+    window(){
+        int c=1;
 
     //cout<<"Enter your choice";
     while(c>0 && c<9){
     cout<<"\t\t\t****   CHOICES   ****";  
     
-     cout<<endl<<"\t\t1. Open account "<<endl;
-    cout<<"\t\t2. Details "<<endl;
-    cout<<"\t\t3. Deposit money "<<endl;
-    cout<<"\t\t4. Withdraw money"<<endl;
-    cout<<"\t\t5. Apply for loan "<<endl;
-    cout<<"\t\t6. Apply for card"<<endl;
-    cout<<"\t\t7. Card service "<<endl;
-    cout<<"\t\t8. Fixed Deposit"<<endl;
+     cout<<endl<<"\t1. Open account "<<endl;
+    cout<<"\t2. Details "<<endl;
+    cout<<"\t3. Deposit money "<<endl;
+    cout<<"\t4. Withdraw money"<<endl;
+    cout<<"\t5. Apply for loan "<<endl;
+    cout<<"\t6. Apply for card"<<endl;
+    cout<<"\t7. Card service "<<endl;
+    cout<<"\t8. Fixed Deposit"<<endl;
 
-    cout<<endl<<"\t\tEnter your choice- ";
+    cout<<endl<<"\tEnter your choice- ";
      cin>>c;
+     cout<<endl;
+   
     switch(c){
+        
         case 1:
-        b.open_acc();
+        open_acc();
         break;
+        
         case 2:
-        b.check_balance();
+        check_balance();
         break;
+        
         case 3:
-        b.deposit();
+        deposit();
         break;
+        
         case 4:
-        b.withdraw();
+        withdraw();
         break;
+        
         case 5:
-        l.loan();
+        loan();
         break;
+        
         case 6:
-        k.cards();
+        cards();
         break;
+        
         case 7:
-        k.service();
+        service();
         break;
+        
         case 8:
-        f.fide();
+        fide();
         break;
+        
         default:
         cout<<"Invalid choice"<<endl;
     }
     cout<<"-----------------------------------------------------------------------------------------------------------------------------"<<endl;
   }
+    }
+    ~window(){
+        cout<<"Aane ke liye Dhanyvad"<<endl;
+    }
+};
+
+int main(){
+    
+    window w;
+
   return 0;
 }
