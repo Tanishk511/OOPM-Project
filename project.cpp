@@ -140,7 +140,7 @@ class Bank: public Customer
     }
    
     void check_balance(){
-        Customer::cho_acc();
+        cho_acc();
         if(t==1){
             name=name;
             acc_no=acc_no;
@@ -187,11 +187,11 @@ class Card : virtual public Bank{
     int serv;
     void cards(){
     cho_acc();
-    cout<<"Type of card"<<endl;
+    cout<<"Type of card(Credit or Debit)"<<endl;
     cin>>card;
     cout<<"Address";
     cin>>address;
-    cout<<"Your card will deliver to your postal address"<<endl;
+    cout<<"Your "<<card<<" card will deliver to your postal address"<<endl;
     }
     void service(){
     cout<<"1.Block  2.Activate Ecom services  3.Activate ATM service  4.Deactivate ATM service\n";
@@ -249,7 +249,7 @@ class Loan : virtual public Bank{
   } 
 };
 
-  class FixDep: virtual public Bank{
+  class FixedDeposit: virtual public Bank{
     public:
     int fd;
     int interest;
@@ -329,6 +329,7 @@ class Loan : virtual public Bank{
                 cout<<"Amount you receive after "<<ti<<" years from your FD is "<<amo<<endl;
         break;
           
+
          case 3:
             if(age>=60){
             if(ti<=3){
@@ -365,7 +366,7 @@ class Loan : virtual public Bank{
      }
   };
 
-  class window:virtual public Bank, public Loan, public Card, public FixDep{
+  class window:virtual public Bank, public Loan, public Card, public FixedDeposit{
     public:
 
     window(){
@@ -373,7 +374,8 @@ class Loan : virtual public Bank{
 
     //cout<<"Enter your choice";
     while(c>0 && c<9){
-    cout<<"\t\t\t****   CHOICES   ****";  
+
+    cout<<"\n\t\t\t****   CHOICES   ****";  
     
      cout<<endl<<"\t1. Open account "<<endl;
     cout<<"\t2. Details "<<endl;
@@ -383,6 +385,7 @@ class Loan : virtual public Bank{
     cout<<"\t6. Apply for card"<<endl;
     cout<<"\t7. Card service "<<endl;
     cout<<"\t8. Fixed Deposit"<<endl;
+    cout<<"\t9. Exit"<<endl;
 
     cout<<endl<<"\tEnter your choice- ";
      cin>>c;
@@ -421,15 +424,15 @@ class Loan : virtual public Bank{
         case 8:
         fide();
         break;
-        
+
         default:
-        cout<<"Invalid choice"<<endl;
+        cout<<""<<endl;
     }
     cout<<"-----------------------------------------------------------------------------------------------------------------------------"<<endl;
   }
     }
     ~window(){
-        cout<<"Aane ke liye Dhanyvad"<<endl;
+        cout<<"\t\t\t||||  Aane ke liye Dhanyvaad  ||||"<<endl;
     }
 };
 
